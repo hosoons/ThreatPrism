@@ -1633,7 +1633,7 @@ function setupMapInteraction(container, canvas, ctx, w, h) {
 function renderMapLegend() {
   const el = document.getElementById('mapLegend');
   el.innerHTML = Object.entries(SEV_COLORS).map(([sev,color]) =>
-    `<div class="map-legend-item"><div class="map-legend-dot" style="background:${color}"></div>${sev}</div>`
+    `<div class="map-legend-item" style="color:${color};font-weight:600"><div class="map-legend-dot" style="background:${color}"></div>${sev}</div>`
   ).join('');
 }
 
