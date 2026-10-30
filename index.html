@@ -458,6 +458,20 @@ body::before {
   font-size: 12px;
   font-weight: 500;
 }
+.mode-tag {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 7px;
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--text-muted);
+  vertical-align: middle;
+}
+.mode-tag:empty { display: none; }
 .region-stat { gap: 8px; }
 .region-stat .r-name { min-width: 0; }
 .region-stat .r-right {
@@ -906,7 +920,7 @@ select, input[type="time"] {
       <div class="map-tooltip" id="mapTooltip"></div>
     </div>
     <div class="map-legend" id="mapLegend"></div>
-    <div class="section-title">지역별 현황</div>
+    <div class="section-title">지역별 현황 <span id="regionModeTag" class="mode-tag"></span></div>
     <div class="map-region-stats" id="regionStats"></div>
   </section>
 
@@ -1639,6 +1653,8 @@ function renderMapLegend() {
 
 function renderRegionStats() {
   const el = document.getElementById('regionStats');
+  const tag = document.getElementById('regionModeTag');
+  if (tag) tag.textContent = viewMode === 'today' ? '오늘' : ((dateRange.from || dateRange.to) ? '누적 · 기간 선택' : '누적');
   const regionCounts = {}, regionSev = {};
   Object.keys(REGIONS).forEach(r => { regionCounts[r] = 0; regionSev[r] = { critical:0, high:0 }; });
   getFilteredIncidents().forEach(inc => {
