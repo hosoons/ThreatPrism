@@ -117,6 +117,9 @@ body::before {
   height: 32px;
   width: auto;
 }
+@media (max-width: 520px) {
+  .app-header .logo-icon { height: 22px; max-width: 42vw; object-fit: contain; }
+}
 
 .header-status {
   display: flex;
@@ -913,6 +916,13 @@ select, input[type="time"] {
   <!-- Settings -->
   <section id="viewSettings" class="view">
     <div class="settings-section">
+      <h3>ℹ️ 자동 수집 안내</h3>
+      <div class="setting-row" style="display:block">
+        <div class="setting-label">매 평일 09:00 (KST) 자동 갱신</div>
+        <div class="setting-desc" style="margin-top:6px;line-height:1.6">데이터는 평일(월~금) 오전 9시에 자동 수집되어 이 사이트에 반영됩니다. 푸시 알림과 이메일 브리핑에는 이 사이트 링크가 포함됩니다. 수집 일정과 알림 수신 설정은 이 화면이 아니라 자동 수집 작업에서 관리됩니다.</div>
+      </div>
+    </div>
+    <div class="settings-section" style="display:none">
       <h3>📅 브리핑 일정</h3>
       <div class="setting-row">
         <div><div class="setting-label">브리핑 시간</div><div class="setting-desc">매일 브리핑 수집 시간</div></div>
@@ -923,7 +933,7 @@ select, input[type="time"] {
         <div class="day-selector" id="daySelector"></div>
       </div>
     </div>
-    <div class="settings-section">
+    <div class="settings-section" style="display:none">
       <h3>🔔 알림 설정</h3>
       <div class="setting-row">
         <div><div class="setting-label">푸시 알림</div><div class="setting-desc">Claude 앱 알림 (계정 필요)</div></div>
