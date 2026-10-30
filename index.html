@@ -1146,7 +1146,8 @@ function renderAll() {
 /* ====== HEADER ====== */
 function renderHeader() {
   const now = new Date();
-  const opts = { year:'numeric', month:'long', day:'numeric', weekday:'short' };
+  const narrow = window.innerWidth < 520;
+  const opts = narrow ? { month:'long', day:'numeric', weekday:'short' } : { year:'numeric', month:'long', day:'numeric', weekday:'short' };
   document.getElementById('headerDate').textContent = now.toLocaleDateString('ko-KR', opts);
 }
 
