@@ -458,6 +458,20 @@ body::before {
   font-size: 12px;
   font-weight: 500;
 }
+.region-stat { gap: 8px; }
+.region-stat .r-name { min-width: 0; }
+.region-stat .r-right {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.region-stat .r-level {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: .04em;
+}
 .region-stat .r-count {
   font-family: var(--font-mono);
   font-weight: 700;
@@ -1625,14 +1639,28 @@ function renderMapLegend() {
 
 function renderRegionStats() {
   const el = document.getElementById('regionStats');
-  const regionCounts = {};
-  Object.keys(REGIONS).forEach(r => regionCounts[r] = 0);
+  const regionCounts = {}, regionSev = {};
+  Object.keys(REGIONS).forEach(r => { regionCounts[r] = 0; regionSev[r] = { critical:0, high:0 }; });
   getFilteredIncidents().forEach(inc => {
-    if (inc.region && regionCounts[inc.region]!==undefined) regionCounts[inc.region]++;
+    // data uses "Asia"; the region list keys it as "Asia Pacific"
+    const key = inc.region === 'Asia' ? 'Asia Pacific' : inc.region;
+    if (key && regionCounts[key] !== undefined) {
+      regionCounts[key]++;
+      if (inc.severity === 'critical' || inc.severity === 'high') regionSev[key][inc.severity]++;
+    }
   });
-  el.innerHTML = Object.entries(REGIONS).map(([key, r]) =>
-    `<div class="region-stat"><span class="r-name">${r.label}</span><span class="r-count">${regionCounts[key]||0}</span></div>`
-  ).join('');
+  // Same rule as the header threat level (critical >3 CRITICAL, critical >0 HIGH, high >3 ELEVATED, else LOW),
+  // applied to the incidents currently shown (cumulative when the 누적 toggle is on).
+  const levelOf = (s) => s.critical > 3 ? ['CRITICAL', SEV_COLORS.critical]
+                      : s.critical > 0 ? ['HIGH', SEV_COLORS.high]
+                      : s.high > 3 ? ['ELEVATED', SEV_COLORS.medium]
+                      : ['LOW', SEV_COLORS.low];
+  el.innerHTML = Object.entries(REGIONS).map(([key, r]) => {
+    const [label, color] = levelOf(regionSev[key]);
+    return `<div class="region-stat"><span class="r-name">${r.label}</span>` +
+      `<span class="r-right"><span class="r-level" style="color:${color}">${label}</span>` +
+      `<span class="r-count" style="color:${color}">${regionCounts[key]||0}</span></span></div>`;
+  }).join('');
 }
 
 /* ====== FORCE GRAPH (Obsidian-style) ====== */
