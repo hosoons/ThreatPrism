@@ -5,18 +5,15 @@
 <linearGradient id="side" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1c3f78"/><stop offset="1" stop-color="#0d1f45"/></linearGradient>
 </defs>
 <rect width="512" height="512" rx="112" fill="url(#bg)"/>
-<!-- incoming white beam -->
-<line x1="40" y1="300" x2="196" y2="268" stroke="#fff" stroke-width="9" stroke-linecap="round" opacity=".95"/>
-<!-- prism -->
-<polygon points="256,92 146,372 366,372" fill="url(#face)"/>
-<polygon points="256,92 366,372 300,372" fill="url(#side)" opacity=".55"/>
-<polygon points="256,92 146,372 366,372" fill="none" stroke="#d8f3ff" stroke-width="7" stroke-linejoin="round"/>
-<!-- dispersed beams -->
+<line x1="40" y1="276" x2="169.6" y2="250.0" stroke="#fff" stroke-width="9" stroke-linecap="round" opacity=".95"/>
+<polygon points="256,93.4 136.0,301.3 376.0,301.3" fill="url(#face)"/>
+<polygon points="256,93.4 376.0,301.3 296.0,301.3" fill="url(#side)" opacity=".55"/>
+<polygon points="256,93.4 136.0,301.3 376.0,301.3" fill="none" stroke="#d8f3ff" stroke-width="7" stroke-linejoin="round"/>
 <g stroke-width="9" stroke-linecap="round">
-<line x1="318" y1="262" x2="472" y2="214" stroke="#ff2d55"/>
-<line x1="322" y1="276" x2="476" y2="256" stroke="#ff9500"/>
-<line x1="326" y1="290" x2="478" y2="298" stroke="#ffcc00"/>
-<line x1="330" y1="304" x2="474" y2="340" stroke="#34c759"/>
-<line x1="334" y1="318" x2="468" y2="382" stroke="#5ac8fa"/>
+<line x1="328.5" y1="226" x2="476" y2="185.4" stroke="#ff2d55"/>
+<line x1="335.5" y1="238" x2="476" y2="217.7" stroke="#ff9500"/>
+<line x1="342.4" y1="250" x2="476" y2="250.0" stroke="#ffcc00"/>
+<line x1="349.3" y1="262" x2="476" y2="282.3" stroke="#34c759"/>
+<line x1="356.2" y1="274" x2="476" y2="314.6" stroke="#5ac8fa"/>
 </g>
 </svg>
